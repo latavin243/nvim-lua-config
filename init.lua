@@ -323,34 +323,32 @@ require("lazy").setup({
       lazy = false,
       priority = 1000,
       build = ":TSUpdate",
-      config = function()
-        require "nvim-treesitter.configs".setup {
-          -- add languages
-          ensure_installed = {
-            "bash", "query",
-            "c", "cpp",
-            "json",
-            "javascript", "typescript", "tsx", "css",
-            "lua",
-            "python",
-            -- "rust",
-            "go",
-            "markdown", "markdown_inline",
-            "typst",
-            "vim",
-          },
+      opts = {
+        -- add languages
+        ensure_installed = {
+          "bash", "query",
+          "c", "cpp",
+          "json",
+          "javascript", "typescript", "tsx", "css",
+          "lua",
+          "python",
+          -- "rust",
+          "go",
+          "markdown", "markdown_inline",
+          "typst",
+          "vim",
+        },
 
-          highlight = { enable = true, disable = {} },
-          indent = { enable = true },
-          -- incremental_selection = {}
+        highlight = { enable = true, disable = {} },
+        indent = { enable = true },
+        -- incremental_selection = {}
 
-          rainbow = {
-            enable = true,
-            extended_mode = true,
-            max_file_lines = nil,
-          },
-        }
-      end
+        rainbow = {
+          enable = true,
+          extended_mode = true,
+          max_file_lines = nil,
+        },
+      },
     }
   },
   -- "p00f/nvim-ts-rainbow", -- rainbow bracket
