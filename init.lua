@@ -67,7 +67,7 @@ opt.history              = 1000;
 
 -- fold
 opt.foldenable           = true;
-opt.foldmethod           = 'indent'
+opt.foldmethod           = "indent"
 opt.foldlevel            = 99
 opt.foldenable           = true
 opt.foldlevelstart       = 99
@@ -180,13 +180,13 @@ require("lazy").setup({
   {
     -- theme
     {
-      -- 'srcery-colors/srcery-vim',
+      -- "srcery-colors/srcery-vim",
       "morhetz/gruvbox",
       lazy = false,    -- make sure we load this during startup if it is your main colorscheme
       priority = 1000, -- make sure to load this before all the other start plugins
       config = function()
         -- load the colorscheme here
-        vim.g.gruvbox_contrast_dark = 'hard'
+        vim.g.gruvbox_contrast_dark = "hard"
         vim.cmd([[colorscheme gruvbox]])
       end
     },
@@ -196,8 +196,8 @@ require("lazy").setup({
       "nvim-lualine/lualine.nvim",
       dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
-        require('lualine').setup({
-          options = { theme = 'gruvbox' },
+        require("lualine").setup({
+          options = { theme = "gruvbox" },
         })
       end
     },
@@ -208,24 +208,25 @@ require("lazy").setup({
       config = function()
         vim.g.startify_change_to_dir = 0
         vim.g.startify_change_to_vcs_root = 1
-        vim.g.startify_session_dir = '$HOME/.vim/sessions'
+        vim.g.startify_session_dir = "$HOME/.vim/sessions"
         vim.g.startify_files_number = 20
       end
     },
 
-    -- { 'echasnovski/mini.nvim', version = false },
+    -- { "echasnovski/mini.nvim", version = false },
 
     -- signs
     {
       "lewis6991/gitsigns.nvim",
+      lazy = true,
       config = function()
-        require('gitsigns').setup({
+        require("gitsigns").setup({
           signs = {
-            add = { text = '+' },
-            change = { text = '~' },
-            delete = { text = '_' },
-            topdelete = { text = '‾' },
-            changedelete = { text = '~' },
+            add = { text = "+" },
+            change = { text = "~" },
+            delete = { text = "_" },
+            topdelete = { text = "‾" },
+            changedelete = { text = "~" },
           },
         })
       end
@@ -234,7 +235,7 @@ require("lazy").setup({
 
   -- editing
   {
-    'tpope/vim-repeat',
+    "tpope/vim-repeat",
     {
       "andrewradev/inline_edit.vim", -- narrow region
       config = function()
@@ -243,21 +244,21 @@ require("lazy").setup({
       end
     },
     -- auto increment, vis & visincr
-    'vim-scripts/vis',
+    "vim-scripts/vis",
     -- :B, :S
-    'vim-scripts/VisIncr',
+    "vim-scripts/VisIncr",
     -- :I, :I -1, :II, etc
-    'jiangmiao/auto-pairs',
-    'vim-scripts/swapcol.vim',
+    "jiangmiao/auto-pairs",
+    "vim-scripts/swapcol.vim",
 
     -- conversion
-    'tpope/vim-abolish',
-    'tpope/vim-surround',
-    -- 'scrooloose/nerdcommenter',
+    "tpope/vim-abolish",
+    "tpope/vim-surround",
+    -- "scrooloose/nerdcommenter",
     {
       "numToStr/Comment.nvim",
       config = function()
-        require('Comment').setup({
+        require("Comment").setup({
           -- Add a space b/w comment and the line
           padding = true,
           -- Whether the cursor should stay at its position
@@ -271,33 +272,33 @@ require("lazy").setup({
     },
 
     -- format
-    'nvie/vim-rst-tables',
+    "nvie/vim-rst-tables",
     {
-      'dhruvasagar/vim-table-mode',
+      "dhruvasagar/vim-table-mode",
       config = function()
         keymap.set("n", "<leader>tm", ":TableModeToggle<cr>")
       end
     },
-    'godlygeek/tabular',
+    "godlygeek/tabular",
 
     -- information
-    'tpope/vim-fugitive',
+    "tpope/vim-fugitive",
     {
-      'RRethy/vim-illuminate',
+      "RRethy/vim-illuminate",
       config = function()
         keymap.set("n", "<leader>ll", ":IlluminateToggle<cr>")
       end
     },
-    'bronson/vim-trailing-whitespace',
-    { 'tversteeg/registers.nvim', branch = 'main', },
+    "bronson/vim-trailing-whitespace",
+    { "tversteeg/registers.nvim", branch = "main", },
 
     -- splitjoin
     {
-      'Wansmer/treesj',
+      "Wansmer/treesj",
       dependencies = { "nvim-treesitter/nvim-treesitter" },
       keys = { { "gS", "<cmd>TSJToggle<cr>" } },
       config = function()
-        require('treesj').setup({
+        require("treesj").setup({
           use_default_keymaps = false,
           max_join_length = 240,
           dot_repeat = true,
@@ -316,14 +317,14 @@ require("lazy").setup({
 
   -- syntax (treesitter)
   {
-    'nvim-treesitter/playground',
+    "nvim-treesitter/playground",
     {
       "nvim-treesitter/nvim-treesitter",
       lazy = false,
       priority = 1000,
       build = ":TSUpdate",
       config = function()
-        require 'nvim-treesitter.configs'.setup {
+        require "nvim-treesitter.configs".setup {
           -- add languages
           ensure_installed = {
             "bash", "query",
@@ -398,27 +399,27 @@ require("lazy").setup({
         })
 
         -- gofumpt on save
-        vim.api.nvim_create_autocmd('BufWritePre', {
-          pattern = '*.go',
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          pattern = "*.go",
           callback = function()
-            vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+            vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
           end
         })
 
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { silent = true }
         -- keymap.set("n", "<leader>do", vim.diagnostic.open_float, opts) -- wrong cmd
-        keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-        keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-        keymap.set('n', '<C-]>', vim.lsp.buf.definition, opts)
-        keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-        keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-        keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-        keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-        keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-        keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+        keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
+        keymap.set("n", "<C-]>", vim.lsp.buf.definition, opts)
+        keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+        keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+        keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+        keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
 
         require("lspconfig").lua_ls.setup {
           capabilities = capabilities,
@@ -475,7 +476,7 @@ require("lazy").setup({
       "hrsh7th/nvim-cmp",
     },
     config = function()
-      -- local lsp = require('plugins.lsp')
+      -- local lsp = require("plugins.lsp")
       require("go").setup({
         go = "go",
         goimports = "gopls",
@@ -493,8 +494,8 @@ require("lazy").setup({
       })
 
       -- snippet
-      local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-      require('go').setup({
+      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      require("go").setup({
         -- other setups ....
         lsp_cfg = {
           capabilities = capabilities,
@@ -507,7 +508,7 @@ require("lazy").setup({
       -- vim.api.nvim_create_autocmd("BufWritePre", {
       --   pattern = "*.go",
       --   callback = function()
-      --     require('go.format').goimport()
+      --     require("go.format").goimport()
       --   end,
       --   group = format_sync_grp,
       -- })
@@ -534,14 +535,14 @@ require("lazy").setup({
       cmp.setup({
         snippet = {
           expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            require("luasnip").lsp_expand(args.body)
           end,
         },
         mapping = cmp.mapping.preset.insert({
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-e>'] = cmp.mapping.abort(), -- exit completion, esc works too
-          ['<CR>'] = cmp.mapping(function(fallback)
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-e>"] = cmp.mapping.abort(), -- exit completion, esc works too
+          ["<CR>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               if luasnip.expandable() then
                 luasnip.expand()
@@ -576,25 +577,25 @@ require("lazy").setup({
         }),
 
         formatting = {
-          fields = { 'abbr', 'menu' },
+          fields = { "abbr", "menu" },
 
           format = function(entry, vim_item)
             vim_item.menu = ({
-              nvim_lsp = '[Lsp]',
-              luasnip = '[LuaSnip]',
-              buffer = '[File]',
-              path = '[Path]',
+              nvim_lsp = "[Lsp]",
+              luasnip = "[LuaSnip]",
+              buffer = "[File]",
+              path = "[Path]",
             })[entry.source.name]
             return vim_item
           end,
         },
 
         sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'copilot' },
-          { name = 'path' },
-        }, { { name = 'buffer' }, })
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "copilot" },
+          { name = "path" },
+        }, { { name = "buffer" }, })
       })
     end
   },
@@ -609,7 +610,7 @@ require("lazy").setup({
       local lsfunc = ls.function_node
 
       ls.add_snippets("all", {
-        lssnip("dt", lsfunc(function() return os.date('%Y-%m-%d') end, {})),
+        lssnip("dt", lsfunc(function() return os.date("%Y-%m-%d") end, {})),
         lssnip("ts10", lsfunc(function() return tostring(os.time()) end, {})),
         lssnip("ts13", lsfunc(function() return tostring(os.time() * 1000) end, {})),
       })
@@ -625,13 +626,13 @@ require("lazy").setup({
       vim.g.copilot_enabled = true
       vim.g.copilot_assume_mapped = true
       vim.g.copilot_no_tab_map = true
-      -- vim.api.nvim_set_keymap('i', '<c-p>', '<Plug>(copilot-suggest)', {})
-      -- vim.api.nvim_set_keymap('i', '<c-n>', '<Plug>(copilot-next)', { silent = true })
-      -- vim.api.nvim_set_keymap('i', '<c-l>', '<Plug>(copilot-previous)', { silent = true })
+      -- vim.api.nvim_set_keymap("i", "<c-p>", "<Plug>(copilot-suggest)", {})
+      -- vim.api.nvim_set_keymap("i", "<c-n>", "<Plug>(copilot-next)", { silent = true })
+      -- vim.api.nvim_set_keymap("i", "<c-l>", "<Plug>(copilot-previous)", { silent = true })
       vim.cmd('imap <silent><script><expr> <C-J> copilot#Accept("")')
       vim.cmd([[
         let g:copilot_filetypes = {
-        \ 'TelescopePrompt': v:false,
+        \ "TelescopePrompt": v:false,
         \ }
         ]])
     end
@@ -642,8 +643,8 @@ require("lazy").setup({
     "christoomey/vim-tmux-navigator",
 
     {
-      'nvim-telescope/telescope.nvim',
-      branch = 'master',
+      "nvim-telescope/telescope.nvim",
+      branch = "master",
       dependencies = {
         "nvim-lua/plenary.nvim",
         {
@@ -657,21 +658,21 @@ require("lazy").setup({
         },
       },
       config = function()
-        local builtin = require('telescope.builtin')
-        keymap.set('n', '<leader>ff', builtin.find_files, {})
+        local builtin = require("telescope.builtin")
+        keymap.set("n", "<leader>ff", builtin.find_files, {})
         keymap.set("n", "<leader>fg", builtin.live_grep, {})
-        keymap.set('n', '<leader>fb', builtin.buffers, {})
-        keymap.set('n', '<leader>fh', builtin.help_tags, {})
+        keymap.set("n", "<leader>fb", builtin.buffers, {})
+        keymap.set("n", "<leader>fh", builtin.help_tags, {})
 
         keymap.set("n", "<leader>sf", builtin.live_grep, {})
         keymap.set("n", "<leader>bb", builtin.buffers, {})
-        keymap.set('n', '<leader>dd', builtin.diagnostics, {})
-        keymap.set('n', '<leader>ts', builtin.treesitter, {})
+        keymap.set("n", "<leader>dd", builtin.diagnostics, {})
+        keymap.set("n", "<leader>ts", builtin.treesitter, {})
         keymap.set("n", "gr", builtin.lsp_references, {})
         keymap.set("n", "gb", builtin.git_branches, {})
 
-        local actions = require('telescope.actions')
-        require('telescope').setup({
+        local actions = require("telescope.actions")
+        require("telescope").setup({
           defaults = {
             vimgrep_arguments = {
               "rg",
@@ -708,7 +709,7 @@ require("lazy").setup({
   },
   -- explorer
   {
-    'nvim-tree/nvim-tree.lua',
+    "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
     config = function()
       keymap.set("n", "<leader>ee", ":NvimTreeToggle<cr>")
@@ -744,19 +745,19 @@ require("lazy").setup({
         g.mkdp_markdown_css = ''
         g.mkdp_highlight_css = ''
         g.mkdp_port = ''
-        g.mkdp_page_title = '「${name}」'
+        g.mkdp_page_title = "「${name}」"
         g.mkdp_preview_options = {
           disable_sync_scroll = 0,
-          sync_scroll_type = 'middle',
+          sync_scroll_type = "middle",
           hide_yaml_meta = 1,
         }
       end
     },
     {
-      'chomosuke/typst-preview.nvim',
-      ft = 'typst',
-      version = '0.1.*',
-      build = function() require 'typst-preview'.update() end,
+      "chomosuke/typst-preview.nvim",
+      ft = "typst",
+      version = "0.1.*",
+      build = function() require "typst-preview".update() end,
     },
     {
       "scalameta/nvim-metals",
