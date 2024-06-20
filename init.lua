@@ -194,7 +194,7 @@ require("lazy").setup({
     -- status bar
     {
       "nvim-lualine/lualine.nvim",
-      dependencies = { 'nvim-tree/nvim-web-devicons' },
+      dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
         require('lualine').setup({
           options = { theme = 'gruvbox' },
@@ -294,7 +294,7 @@ require("lazy").setup({
     -- splitjoin
     {
       'Wansmer/treesj',
-      dependencies = { 'nvim-treesitter/nvim-treesitter' },
+      dependencies = { "nvim-treesitter/nvim-treesitter" },
       keys = { { "gS", "<cmd>TSJToggle<cr>" } },
       config = function()
         require('treesj').setup({
@@ -517,16 +517,15 @@ require("lazy").setup({
   -- completion
   {
     "hrsh7th/nvim-cmp",
-    after = {
-      "L3MON4D3/LuaSnip",
-      "github/copilot.vim",
-    },
     dependencies = {
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-copilot" },
-      { "hrsh7th/cmp-path" }, -- file path
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-copilot",
+      "hrsh7th/cmp-path", -- file path
+
+      "github/copilot.vim",
       -- snippets
-      { "saadparwaiz1/cmp_luasnip" },
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
     },
     config = function()
       local cmp = require("cmp")
@@ -710,7 +709,7 @@ require("lazy").setup({
   -- explorer
   {
     'nvim-tree/nvim-tree.lua',
-    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+    dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
     config = function()
       keymap.set("n", "<leader>ee", ":NvimTreeToggle<cr>")
 
