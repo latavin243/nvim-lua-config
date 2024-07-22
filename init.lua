@@ -263,6 +263,12 @@ require("lazy").setup({
           padding = true,
           -- Whether the cursor should stay at its position
           sticky = true,
+          toggler = {
+            ---Line-comment toggle keymap
+            line = ',cc',
+            ---Block-comment toggle keymap
+            block = ',bc',
+          },
           mappings = {
             basic = true,
             extra = false,
