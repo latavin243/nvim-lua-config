@@ -827,7 +827,11 @@ require("lazy").setup({
 
   -- others
   -- require("plugins.wilder"),
+
+  { "sindrets/diffview.nvim" },
 })
+
+-- end of lazy plugins
 
 --
 -- custom funcs
