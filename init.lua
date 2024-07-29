@@ -218,7 +218,7 @@ require("lazy").setup({
     -- signs
     {
       "lewis6991/gitsigns.nvim",
-      lazy = true,
+      event = "InsertEnter",
       config = function()
         require("gitsigns").setup({
           signs = {
@@ -244,11 +244,11 @@ require("lazy").setup({
       end
     },
     -- auto increment, vis & visincr
-    "vim-scripts/vis",
     -- :B, :S
-    "vim-scripts/VisIncr",
+    "vim-scripts/vis",
     -- :I, :I -1, :II, etc
-    "jiangmiao/auto-pairs",
+    "vim-scripts/VisIncr",
+    { "windwp/nvim-autopairs",      event = "InsertEnter" },
     "vim-scripts/swapcol.vim",
 
     -- conversion
@@ -257,6 +257,7 @@ require("lazy").setup({
     -- "scrooloose/nerdcommenter",
     {
       "numToStr/Comment.nvim",
+      keys = { "<leader>cc", "<leader>bc" },
       config = function()
         require("Comment").setup({
           -- Add a space b/w comment and the line
@@ -279,24 +280,14 @@ require("lazy").setup({
 
     -- format
     "nvie/vim-rst-tables",
-    {
-      "dhruvasagar/vim-table-mode",
-      config = function()
-        keymap.set("n", "<leader>tm", ":TableModeToggle<cr>")
-      end
-    },
+    { "dhruvasagar/vim-table-mode", keys = { { "<leader>tm", "<cmd>TableModeToggle<cr>" } } },
     "godlygeek/tabular",
 
     -- information
     "tpope/vim-fugitive",
-    {
-      "RRethy/vim-illuminate",
-      config = function()
-        keymap.set("n", "<leader>ll", ":IlluminateToggle<cr>")
-      end
-    },
-    "bronson/vim-trailing-whitespace",
+    { "RRethy/vim-illuminate",    keys = { { "<leader>ll", "<cmd>IlluminateToggle<cr>" } }, },
     { "tversteeg/registers.nvim", branch = "main", },
+    "bronson/vim-trailing-whitespace",
 
     -- splitjoin
     {
@@ -376,7 +367,7 @@ require("lazy").setup({
         })
 
         require("lspconfig").gopls.setup({
-          cmd = { "gopls", "serve" },
+          cmd = { "gopls" },
           fieltypes = { "go", "gomod", "gowork", "gotmpl" },
           root_dir = util.root_pattern("go.work", "go.mod", ".git"),
           settings = {
@@ -398,6 +389,8 @@ require("lazy").setup({
               },
               gofumpt = true,
               staticcheck = true,
+              usePlaceholders = true,
+              completeUnimported = true,
             },
           },
         })
@@ -560,6 +553,7 @@ require("lazy").setup({
   -- completion
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-copilot",
@@ -752,10 +746,9 @@ require("lazy").setup({
   -- explorer
   {
     "nvim-tree/nvim-tree.lua",
+    keys = { { "<leader>ee", "<cmd>NvimTreeToggle<cr>" } },
     dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
     config = function()
-      keymap.set("n", "<leader>ee", ":NvimTreeToggle<cr>")
-
       require("nvim-tree").setup({
         auto_reload_on_write = true,
         update_focused_file = { enable = true },
@@ -828,7 +821,7 @@ require("lazy").setup({
   -- others
   -- require("plugins.wilder"),
 
-  { "sindrets/diffview.nvim" },
+  { "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } },
 })
 
 -- end of lazy plugins
