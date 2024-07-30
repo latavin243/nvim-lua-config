@@ -233,28 +233,44 @@ require("lazy").setup({
     },
   },
 
+  -- keybinding & command
+  {
+    "folke/which-key.nvim",
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+    keys = { {
+      "<leader>?",
+      function() require("which-key").show({ global = false }) end,
+      desc = "Buffer Local Keymaps (which-key)",
+    } },
+  },
+
   -- editing
   {
-    "tpope/vim-repeat",
+    { "tpope/vim-repeat",        event = "VeryLazy", },
     {
       "andrewradev/inline_edit.vim", -- narrow region
+      event = "VeryLazy",
+      keys = { { "<leader>nr", "<cmd>InlineEdit<cr>", mode = { "v" } } },
       config = function()
         vim.g.inline_edit_autowrite = 1
-        keymap.set("v", "<leader>nr", ":InlineEdit<cr>")
       end
     },
     -- auto increment, vis & visincr
     -- :B, :S
-    "vim-scripts/vis",
+    { "vim-scripts/vis",         event = "VeryLazy" },
     -- :I, :I -1, :II, etc
-    "vim-scripts/VisIncr",
-    { "windwp/nvim-autopairs",      event = "InsertEnter" },
-    "vim-scripts/swapcol.vim",
+    { "vim-scripts/VisIncr",     event = "VeryLazy" },
+    { "windwp/nvim-autopairs",   event = "InsertEnter" },
+    { "vim-scripts/swapcol.vim", event = "VeryLazy" },
 
     -- conversion
-    "tpope/vim-abolish",
-    "tpope/vim-surround",
-    -- "scrooloose/nerdcommenter",
+    { "tpope/vim-abolish",       event = "VeryLazy" },
+    { "tpope/vim-surround",      event = "VeryLazy" },
+    -- {"scrooloose/nerdcommenter", event = "VeryLazy" },
     {
       "numToStr/Comment.nvim",
       keys = { "<leader>cc", "<leader>bc" },
@@ -279,15 +295,14 @@ require("lazy").setup({
     },
 
     -- format
-    "nvie/vim-rst-tables",
-    { "dhruvasagar/vim-table-mode", keys = { { "<leader>tm", "<cmd>TableModeToggle<cr>" } } },
-    "godlygeek/tabular",
+    { "nvie/vim-rst-tables",             event = "VeryLazy" },
+    { "dhruvasagar/vim-table-mode",      keys = { { "<leader>tm", "<cmd>TableModeToggle<cr>" } } },
+    { "godlygeek/tabular",               event = "VeryLazy" },
 
     -- information
-    "tpope/vim-fugitive",
-    { "RRethy/vim-illuminate",    keys = { { "<leader>ll", "<cmd>IlluminateToggle<cr>" } }, },
-    { "tversteeg/registers.nvim", branch = "main", },
-    "bronson/vim-trailing-whitespace",
+    { "tpope/vim-fugitive",              event = "VeryLazy" },
+    { "RRethy/vim-illuminate",           keys = { { "<leader>ll", "<cmd>IlluminateToggle<cr>" } }, },
+    { "bronson/vim-trailing-whitespace", event = "VeryLazy" },
 
     -- splitjoin
     {
@@ -306,6 +321,7 @@ require("lazy").setup({
     -- selection
     {
       "gcmt/wildfire.vim",
+      event = "VeryLazy",
       config = function()
         vim.g.wildfire_objects = { "iw", "i'", 'i"', "i)", "i]", "i}", "ip", "it" }
       end
@@ -314,7 +330,7 @@ require("lazy").setup({
 
   -- syntax (treesitter)
   {
-    "nvim-treesitter/playground",
+    { "nvim-treesitter/playground", event = "VeryLazy" },
     {
       "nvim-treesitter/nvim-treesitter",
       lazy = false,
@@ -348,12 +364,13 @@ require("lazy").setup({
       },
     }
   },
-  -- "p00f/nvim-ts-rainbow", -- rainbow bracket
+  -- {"p00f/nvim-ts-rainbow",}, -- rainbow bracket
 
   -- lsp
   {
     {
       "neovim/nvim-lspconfig",
+      event = "VeryLazy",
       config = function()
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local util = require "lspconfig/util"
@@ -429,7 +446,7 @@ require("lazy").setup({
     },
     {
       "williamboman/mason.nvim",
-      lazy = false,
+      event = "VeryLazy",
       build = ":MasonUpdate", -- :MasonUpdate updates registry contents
       config = function()
         require("mason").setup({
@@ -445,7 +462,7 @@ require("lazy").setup({
     },
     {
       "williamboman/mason-lspconfig.nvim", -- a bridge between mason.nvim and lspconfig
-      lazy = false,
+      event = "VeryLazy",
       dependencies = { "neovim/nvim-lspconfig", },
       config = function()
         require("mason-lspconfig").setup({
@@ -639,6 +656,7 @@ require("lazy").setup({
   -- snippets
   {
     "L3MON4D3/LuaSnip",
+    event = "VeryLazy",
     version = "v2.*",
     config = function()
       local ls = require("luasnip")
@@ -676,7 +694,7 @@ require("lazy").setup({
 
   -- navigation
   {
-    "christoomey/vim-tmux-navigator",
+    { "christoomey/vim-tmux-navigator", event = "VeryLazy" },
 
     {
       "nvim-telescope/telescope.nvim",
@@ -693,20 +711,20 @@ require("lazy").setup({
           end
         },
       },
+      keys = {
+        { "<leader>ff", "<cmd>Telescope find_files<cr>" },
+        { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
+        { "<leader>fb", "<cmd>Telescope buffers<cr>" },
+        { "<leader>fh", "<cmd>Telescope help_tags<cr>" },
+
+        { "<leader>sf", "<cmd>Telescope live_grep<cr>" },
+        { "<leader>bb", "<cmd>Telescope buffers<cr>" },
+        { "<leader>dd", "<cmd>Telescope diagnostics<cr>" },
+        { "<leader>ts", "<cmd>Telescope treesitter<cr>" },
+        { "gr",         "<cmd>Telescope lsp_references<cr>" },
+        { "gb",         "<cmd>Telescope git_branches<cr>" },
+      },
       config = function()
-        local builtin = require("telescope.builtin")
-        keymap.set("n", "<leader>ff", builtin.find_files, {})
-        keymap.set("n", "<leader>fg", builtin.live_grep, {})
-        keymap.set("n", "<leader>fb", builtin.buffers, {})
-        keymap.set("n", "<leader>fh", builtin.help_tags, {})
-
-        keymap.set("n", "<leader>sf", builtin.live_grep, {})
-        keymap.set("n", "<leader>bb", builtin.buffers, {})
-        keymap.set("n", "<leader>dd", builtin.diagnostics, {})
-        keymap.set("n", "<leader>ts", builtin.treesitter, {})
-        keymap.set("n", "gr", builtin.lsp_references, {})
-        keymap.set("n", "gb", builtin.git_branches, {})
-
         local actions = require("telescope.actions")
         require("telescope").setup({
           defaults = {
