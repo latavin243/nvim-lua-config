@@ -236,11 +236,8 @@ require("lazy").setup({
   -- keybinding & command
   {
     "folke/which-key.nvim",
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
+    event = "VeryLazy",
+    opts = { preset = "mordern" },
     keys = { {
       "<leader>?",
       function() require("which-key").show({ global = false }) end,
@@ -253,17 +250,14 @@ require("lazy").setup({
     { "tpope/vim-repeat",        event = "VeryLazy", },
     {
       "andrewradev/inline_edit.vim", -- narrow region
-      event = "VeryLazy",
       keys = { { "<leader>nr", "<cmd>InlineEdit<cr>", mode = { "v" } } },
       config = function()
         vim.g.inline_edit_autowrite = 1
       end
     },
     -- auto increment, vis & visincr
-    -- :B, :S
-    { "vim-scripts/vis",         event = "VeryLazy" },
-    -- :I, :I -1, :II, etc
-    { "vim-scripts/VisIncr",     event = "VeryLazy" },
+    { "vim-scripts/vis",         cmd = { "B", "S" } },
+    { "vim-scripts/VisIncr",     cmd = { "I", "II" } }, -- :I, :I -1, :II, etc
     { "windwp/nvim-autopairs",   event = "InsertEnter" },
     { "vim-scripts/swapcol.vim", event = "VeryLazy" },
 
