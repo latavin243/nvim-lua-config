@@ -330,7 +330,7 @@ require("lazy").setup({
 
   -- syntax (treesitter)
   {
-    { "nvim-treesitter/playground", event = "VeryLazy" },
+    -- { "nvim-treesitter/playground", event = "VeryLazy" },
     {
       "nvim-treesitter/nvim-treesitter",
       lazy = false,
