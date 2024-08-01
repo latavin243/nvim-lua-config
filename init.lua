@@ -247,7 +247,10 @@ require("lazy").setup({
 
   -- editing
   {
-    { "tpope/vim-repeat",        event = "VeryLazy", },
+    { "tpope/vim-repeat",   event = "VeryLazy" },
+    { "tpope/vim-surround", event = "VeryLazy" },
+    { 'tpope/vim-sleuth',   event = 'VeryLazy' }, -- auto tab/indent
+    { "tpope/vim-abolish",  event = "VeryLazy" }, -- change case, etc
     {
       "andrewradev/inline_edit.vim", -- narrow region
       keys = { { "<leader>nr", "<cmd>InlineEdit<cr>", mode = { "v" } } },
@@ -261,9 +264,7 @@ require("lazy").setup({
     { "windwp/nvim-autopairs",   event = "InsertEnter" },
     { "vim-scripts/swapcol.vim", event = "VeryLazy" },
 
-    -- conversion
-    { "tpope/vim-abolish",       event = "VeryLazy" },
-    { "tpope/vim-surround",      event = "VeryLazy" },
+    -- comment
     -- {"scrooloose/nerdcommenter", event = "VeryLazy" },
     {
       "numToStr/Comment.nvim",
@@ -293,8 +294,10 @@ require("lazy").setup({
     { "dhruvasagar/vim-table-mode",      keys = { { "<leader>tm", "<cmd>TableModeToggle<cr>" } } },
     { "godlygeek/tabular",               event = "VeryLazy" },
 
-    -- information
+    -- git
     { "tpope/vim-fugitive",              event = "VeryLazy" },
+
+    -- information
     { "RRethy/vim-illuminate",           keys = { { "<leader>ll", "<cmd>IlluminateToggle<cr>" } }, },
     { "bronson/vim-trailing-whitespace", event = "VeryLazy" },
 
