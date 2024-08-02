@@ -252,8 +252,8 @@ require("lazy").setup({
     { 'tpope/vim-sleuth',   event = 'VeryLazy' }, -- auto tab/indent
     { "tpope/vim-abolish",  event = "VeryLazy" }, -- change case, etc
     {
-      "andrewradev/inline_edit.vim", -- narrow region
-      keys = { { "<leader>nr", "<cmd>InlineEdit<cr>", mode = { "v" } } },
+      "andrewradev/inline_edit.vim",              -- narrow region
+      keys = { { "<leader>nr", "<cmd>InlineEdit<cr>", mode = "v" } },
       config = function()
         vim.g.inline_edit_autowrite = 1
       end
@@ -713,6 +713,7 @@ require("lazy").setup({
         { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
         { "<leader>fb", "<cmd>Telescope buffers<cr>" },
         { "<leader>fh", "<cmd>Telescope help_tags<cr>" },
+        { "<leader>fc", "<cmd>Telescope commands<cr>" },
 
         { "<leader>sf", "<cmd>Telescope live_grep<cr>" },
         { "<leader>bb", "<cmd>Telescope buffers<cr>" },
@@ -756,7 +757,22 @@ require("lazy").setup({
           },
         })
       end
-    }
+    },
+
+    -- motion, leap, etc
+    {
+      "folke/flash.nvim",
+      -- event = "VeryLazy",
+      ---@type Flash.Config
+      opts = {},
+      keys = {
+        { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+        { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+        { "r",     mode = { "o" },           function() require("flash").remote() end,            desc = "Remote Flash" },
+        { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+        { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+      },
+    },
   },
   -- explorer
   {
