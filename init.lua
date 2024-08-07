@@ -202,14 +202,41 @@ require("lazy").setup({
     },
 
     -- welcome
+    -- {
+    --   "mhinz/vim-startify",
+    --   event = "VimEnter",
+    --   config = function()
+    --     vim.g.startify_change_to_dir = 0
+    --     vim.g.startify_change_to_vcs_root = 1
+    --     vim.g.startify_files_number = 20
+    --     -- vim.g.startify_session_dir = "$HOME/.config/nvim/"
+    --   end
+    -- },
     {
-      "mhinz/vim-startify",
+      "nvimdev/dashboard-nvim",
+      event = "UIEnter",
       config = function()
-        vim.g.startify_change_to_dir = 0
-        vim.g.startify_change_to_vcs_root = 1
-        vim.g.startify_files_number = 20
-        -- vim.g.startify_session_dir = "$HOME/.config/nvim/"
-      end
+        require('dashboard').setup {
+          theme = "hyper",
+          shortcut_type = "number",
+          change_to_vcs_root = true,
+          config = {
+            -- week_header = { enable = true },
+            mru = { limit = 10, icon = 'MRU', label = '', cwd_only = false },
+            project = { enable = true, limit = 10, icon = 'Proj', label = '', action = 'Telescope find_files cwd=' },
+            shortcut = {
+              { desc = 'LazyUpdate', group = 'Include',  action = 'Lazy update',          key = 'u', },
+              { desc = 'Mason',      group = 'Include',  action = 'Mason',                key = 'm', },
+              { desc = 'Files',      group = 'Function', action = 'Telescope find_files', key = 'f', },
+              { desc = 'Grep',       group = 'Function', action = 'Telescope live_grep',  key = 'g', },
+            },
+          },
+        }
+      end,
+      dependencies = {
+        'nvim-tree/nvim-web-devicons',
+        "nvim-telescope/telescope.nvim",
+      },
     },
 
     -- { "echasnovski/mini.nvim", version = false },
@@ -481,17 +508,16 @@ require("lazy").setup({
       config = function()
         require("mason-lspconfig").setup({
           ensure_installed = {
-            "bash_language_server", -- bash
-            "gopls", "gofumpt",     -- golang
-            "json_lsp",             -- json
-            "lua_ls",               -- lua
-            "marksman",             -- markdown
-            "pyright",              -- python
-            "rust_analyzer",        -- rust
-            "sqlls",                -- sql
-            "tsserver",             -- ts
-            "typst_lsp",            -- typst
-            "yamlls",               -- yaml
+            "gopls",         -- golang
+            "jqls",          -- json
+            "lua_ls",        -- lua
+            "marksman",      -- markdown
+            "pyright",       -- python
+            "rust_analyzer", -- rust
+            "sqlls",         -- sql
+            "tsserver",      -- ts
+            "typst_lsp",     -- typst
+            "yamlls",        -- yaml
           },
           automatic_installation = true,
         })
@@ -747,6 +773,7 @@ require("lazy").setup({
           end
         },
       },
+      cmd = "Telescope",
       keys = {
         { "<leader>ff", "<cmd>Telescope find_files<cr>" },
         { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
