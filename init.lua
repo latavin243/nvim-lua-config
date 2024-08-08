@@ -202,42 +202,41 @@ require("lazy").setup({
     },
 
     -- welcome
-    -- {
-    --   "mhinz/vim-startify",
-    --   event = "VimEnter",
-    --   config = function()
-    --     vim.g.startify_change_to_dir = 0
-    --     vim.g.startify_change_to_vcs_root = 1
-    --     vim.g.startify_files_number = 20
-    --     -- vim.g.startify_session_dir = "$HOME/.config/nvim/"
-    --   end
-    -- },
     {
-      "nvimdev/dashboard-nvim",
-      event = "UIEnter",
+      "mhinz/vim-startify",
       config = function()
-        require('dashboard').setup {
-          theme = "hyper",
-          shortcut_type = "number",
-          change_to_vcs_root = true,
-          config = {
-            -- week_header = { enable = true },
-            mru = { limit = 10, icon = 'MRU', label = '', cwd_only = false },
-            project = { enable = true, limit = 10, icon = 'Proj', label = '', action = 'Telescope find_files cwd=' },
-            shortcut = {
-              { desc = 'LazyUpdate', group = 'Include',  action = 'Lazy update',          key = 'u', },
-              { desc = 'Mason',      group = 'Include',  action = 'Mason',                key = 'm', },
-              { desc = 'Files',      group = 'Function', action = 'Telescope find_files', key = 'f', },
-              { desc = 'Grep',       group = 'Function', action = 'Telescope live_grep',  key = 'g', },
-            },
-          },
-        }
-      end,
-      dependencies = {
-        'nvim-tree/nvim-web-devicons',
-        "nvim-telescope/telescope.nvim",
-      },
+        vim.g.startify_change_to_dir = 0
+        vim.g.startify_change_to_vcs_root = 1
+        vim.g.startify_files_number = 20
+        -- vim.g.startify_session_dir = "$HOME/.config/nvim/"
+      end
     },
+    -- {
+    --   "nvimdev/dashboard-nvim",
+    --   event = "UIEnter",
+    --   config = function()
+    --     require('dashboard').setup {
+    --       theme = "hyper",
+    --       shortcut_type = "number",
+    --       change_to_vcs_root = true,
+    --       config = {
+    --         -- week_header = { enable = true },
+    --         mru = { limit = 10, icon = 'MRU', label = '', cwd_only = false },
+    --         project = { enable = true, limit = 10, icon = 'Proj', label = '', action = 'Telescope find_files cwd=' },
+    --         shortcut = {
+    --           { desc = 'LazyUpdate', group = 'Include',  action = 'Lazy update',          key = 'u', },
+    --           { desc = 'Mason',      group = 'Include',  action = 'Mason',                key = 'm', },
+    --           { desc = 'Files',      group = 'Function', action = 'Telescope find_files', key = 'f', },
+    --           { desc = 'Grep',       group = 'Function', action = 'Telescope live_grep',  key = 'g', },
+    --         },
+    --       },
+    --     }
+    --   end,
+    --   dependencies = {
+    --     'nvim-tree/nvim-web-devicons',
+    --     "nvim-telescope/telescope.nvim",
+    --   },
+    -- },
 
     -- { "echasnovski/mini.nvim", version = false },
 
@@ -275,7 +274,7 @@ require("lazy").setup({
     { "tpope/vim-repeat",   event = { "BufReadPre", "BufNewFile" } },
     { "tpope/vim-surround", event = { "BufReadPre", "BufNewFile" } },
     { 'tpope/vim-sleuth',   event = { "BufReadPre", "BufNewFile" } }, -- auto tab/indent
-    { "tpope/vim-abolish",  event = { "BufReadPre", "BufNewFile" } }, -- change case, etc
+    { "tpope/vim-abolish",  event = "VeryLazy" },                     -- change case, etc
     {
       "andrewradev/inline_edit.vim",                                  -- narrow region
       keys = { { "<leader>nr", "<cmd>InlineEdit<cr>", mode = "v" } },
@@ -830,10 +829,10 @@ require("lazy").setup({
       "folke/flash.nvim",
       opts = {},
       keys = {
-        { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-        { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-        { "r",     mode = { "o" },           function() require("flash").remote() end,            desc = "Remote Flash" },
-        { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+        { "ff",    mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+        { "ft",    mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+        { "fr",    mode = { "o" },           function() require("flash").remote() end,            desc = "Remote Flash" },
+        { "st",    mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
         { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
       },
     },
